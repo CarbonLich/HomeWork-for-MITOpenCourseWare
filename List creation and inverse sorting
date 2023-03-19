@@ -1,0 +1,60 @@
+from random import randint
+def createMyListInpt(sizeOfList):
+    listOfNum = []
+    i=1
+    while i<=sizeOfList:
+        try:
+            addToList = int(input("Please give me the number for slot " +str(i) +" : "))
+            listOfNum.append(addToList)
+            i+=1
+        except:
+            print("that wasn't a number.")
+    return listOfNum
+def createMyListRand(sizeOfList ,numOfDgtInNums):
+    listOfNum = []
+    i=1
+    while i<=sizeOfList:
+        try:
+            addToList = randint(1 ,10**numOfDgtInNums-1)
+            listOfNum.append(addToList)
+            i+=1
+        except:
+            print("that wasn't a number.")
+    return listOfNum
+
+randOrInput = input("Do you want the numbers to be random or input them yourself (Random or Input) : ")
+yesOrNo = False
+
+while yesOrNo == False:  
+    if randOrInput == "Random" or randOrInput == "random":
+        try:
+            listOfNumUnOrg = createMyListRand(int(input("How big do you want this list to be : ")) ,int(input("How many digits do you want these numbers to have : ")))
+            yesOrNo = True
+        except:
+            print("try putting in an intger please.")
+    elif randOrInput == "Input" or randOrInput == "input":
+        try:
+            listOfNumUnOrg = createMyListInpt(int(input("How big do you want this list to be : ")))
+            yesOrNo = True
+        except:
+            print("try putting in an intger please.")
+    else:
+        print("please use the words I am looking for")
+def inversSortTheList(listToSort):
+    i=0
+    while i<len(listToSort)-1:
+        if listToSort[i] < listToSort[i+1]:
+            a = listToSort[i+1]
+            listToSort[i+1] = listToSort[i]
+            listToSort[i] = a
+            i-=2
+        i+=1
+        if i<0:
+            i=0
+    return listToSort
+
+listOfNumOrg = inversSortTheList(listOfNumUnOrg)
+i=0
+while i<len(listOfNumOrg):
+    print(listOfNumOrg[i])
+    i+=1
