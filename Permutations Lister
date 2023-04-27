@@ -1,0 +1,45 @@
+def giveAllPerms(strInput):
+    
+    strToPerm = ""
+    dictToPerm = {}
+    tempMainPermList = []
+
+    def permAStr(strN ,dictN ,listN):
+        tempPermList = []
+        for c in listN:
+            tempDictN = dictN.copy()
+            for j in c:
+                tempDictN[j] -= 1
+            for i in tempDictN:
+                if tempDictN[i] >=1:
+                    tempPermList.append(c+i)
+        if len(tempPermList[0]) != len(strN):
+            return permAStr(strN ,dictN ,tempPermList)
+        else:
+            return tempPermList
+
+    strInput = ''.join(sorted(strInput))
+    
+    for c in strInput:
+        if c.isalpha():
+            strToPerm += c
+        elif c.isdigit():
+            strToPerm += c
+
+    if len(strToPerm) <= 1:
+        tempMainPermList = [strToPerm]
+    else:    
+
+        for c in strInput:
+            try:
+                dictToPerm[c] += 1
+            except:
+                dictToPerm[c] = 1
+                
+        for c in dictToPerm:
+            tempMainPermList.append(c)
+
+        permList = permAStr(strToPerm, dictToPerm ,tempMainPermList)
+    return permList
+tesingTheListMaker = giveAllPerms(input("let's give an input"))
+print(tesingTheListMaker)
