@@ -1,0 +1,46 @@
+from string import ascii_lowercase
+from random import randint
+from time import sleep
+
+listPlaces = ["1st" ,"2nd" ,"3rd" ,"4th" ,"5th" ,"6th" ,"7th" ,"8th" ,"9th" ,"10th" ,"11th" ,"12th" ,"13th" ,"14th" ,"15th" ,"16th" ,"17th" ,"18th" ,"19th" ,"20th" ,"21st" ,"22nd" ,"23rd" ,"24th" ,"25th" ,"26th"]
+
+class RandomNumbers:
+    def __init__(self ,name ,num1 ,num2 ,num3):
+        self.name = name
+        self.first = num1
+        self.second = num2
+        self.third = num3
+    
+    def return_highest(self ):
+        if self.first > self.second and self.first > self.third:
+            return (1 ,self.first)
+        elif self.second > self.third:
+            return (2 ,self.second)
+        else:
+            return (3 ,self.third)
+
+lettersList = []
+
+def makePsudoRando(num1 ,num2):
+    randomNumber = randint(1 ,num1)*randint(1 ,num2)
+    return randomNumber
+
+for c in ascii_lowercase:
+    lettersList.append(RandomNumbers(c ,makePsudoRando(4,6) ,makePsudoRando(4,6) ,makePsudoRando(4,6)))
+currentRandom = randint(0,25)
+currentNum = lettersList[currentRandom]
+currentHighestPlace, currentHighestPlaceVal = currentNum.return_highest()
+
+strToPrint1 = "the " + listPlaces[currentHighestPlace-1] + " number in the " + listPlaces[currentRandom] + " letter has the highest value which is " + str(currentHighestPlaceVal)
+strToPrint2 = "..."
+strToPrint3 = " The letter was " + currentNum.name + " by the way."
+for c in strToPrint1:
+    print(c ,end="" ,flush=True)
+    sleep(.05)
+sleep(1.5)
+for c in strToPrint2:
+    print(c ,end="" ,flush=True)
+    sleep(1.5)
+for c in strToPrint3:
+    print(c ,end="" ,flush=True)
+    sleep(.05)
